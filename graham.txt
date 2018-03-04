@@ -1,0 +1,46 @@
+import time
+import urllib2
+from urllib2 import urlopen
+
+russell3000 = []
+evenBetter = []
+
+def parseRus():
+	try:
+		readFile = open('russell3000.txt','r').read()
+		splitFile = readFile.split('\n')
+		for eachLine in splitFile:
+			splitLine = eachLine.split(' ')
+			ticker = splitLine[-1]
+			russell3000.append(ticker)
+		#print russell3000
+		
+	except Exception, e:
+		print 'failed in the main loop', str(e)
+
+parseRus()
+
+def yahooKeyStats(stock):
+	try:
+		sourceCode = urllib2.urlopen('http://finance.yahoo.com/q/ks?s='+stock).read()
+		currentAssets = sourceCode.split('                            <strong>
+                        Total Current Assets
+                            </strong>
+                        </td><td align="right">
+                                <strong>')[1].split('&nbsp;&nbsp;
+                                </strong>')[0]
+
+		
+			
+
+
+	except Exception,e:
+		#print 'failed in the main loop',str(e)
+		pass
+
+
+for eachStock in russell3000:
+	yahooKeyStats(eachStock)
+	#time.sleep(.2)
+	
+print evenBetter
